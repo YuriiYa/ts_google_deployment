@@ -2,5 +2,7 @@ requests==2.22.0
 numpy==1.15.0
 scikit-learn==0.21.3
 google-cloud-storage==1.17.0
-torch==1.10.0+cpu torchvision==0.11.1+cpu torchaudio==0.10.0+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
+torch==1.10.0+cpu
+torchvision==0.11.1+cpu
+torchaudio===0.7.2
 transformers==4.13.0
