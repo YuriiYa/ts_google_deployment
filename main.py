@@ -22,7 +22,7 @@ from google.cloud import storage
 
 #copy file from bucket
 storage_client = storage.Client()
-bucket = storage_client.bucket('tinder-standup-model-bucket')
+bucket = storage_client.bucket('tinder-standup-model-bucket1')
 model_fileName= 'pytorch_model.bin'
 blob = bucket.blob(model_fileName)
 model_path= os.path.join('/tmp',model_fileName);
