@@ -12,13 +12,13 @@ runtime_config:
 manual_scaling:
   instances: 1
 resources:
-  cpu: 1
-  memory_gb: 6
+  cpu: 2
+  memory_gb: 16
   disk_size_gb: 10
   volumes:
   - name: ramdisk1
     volume_type: tmpfs
-    size_gb: 2
+    size_gb: 8
     
 network:
   forwarded_ports:
