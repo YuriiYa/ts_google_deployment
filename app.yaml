@@ -18,7 +18,7 @@ resources:
   volumes:
   - name: ramdisk1
     volume_type: tmpfs
-    size_gb: 8
+    size_gb: 3
     
 network:
   forwarded_ports:
