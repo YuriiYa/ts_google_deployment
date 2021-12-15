@@ -25,7 +25,8 @@ storage_client = storage.Client()
 bucket = storage_client.bucket('tinder-standup-model-bucket1')
 model_fileName= 'pytorch_model.bin'
 blob = bucket.blob(model_fileName)
-model_path= os.path.join('/tmp',model_fileName);
+rootPath ="./"
+model_path= os.path.join(rootPath,model_fileName);
 blob.download_to_filename(model_path)
 
 
@@ -33,7 +34,7 @@ blob.download_to_filename(model_path)
 #the scripts, run the block where they are used, and click on popup box. 
 from transformers import TextDataset, DataCollatorForLanguageModeling
 from transformers import pipeline
-rootPath ="./"
+
 workingPath=rootPath
 
 #reloading model and tokenizer from local storage
