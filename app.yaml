@@ -12,7 +12,7 @@ runtime_config:
 manual_scaling:
   instances: 1
 resources:
-  cpu: 1
+  cpu: 2
   memory_gb: 8
   disk_size_gb: 10
   volumes:
