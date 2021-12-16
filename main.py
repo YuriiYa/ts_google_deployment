@@ -20,29 +20,50 @@ import transformers
 import torch
 from google.cloud import storage
 
-#copy file from bucket
-storage_client = storage.Client()
-bucket = storage_client.bucket('tinder-standup-model-bucket1')
-model_fileName= 'pytorch_model.bin'
-blob = bucket.blob(model_fileName)
-rootPath ="./"
-model_path= os.path.join(rootPath,model_fileName);
-blob.download_to_filename(model_path)
+def download_blob(bucket_name, source_blob_name, destination_file_name):
+    """Downloads a blob from the bucket."""
+    # The ID of your GCS bucket
+    # bucket_name = "your-bucket-name"
 
+    # The ID of your GCS object
+    # source_blob_name = "storage-object-name"
+
+    # The path to which the file should be downloaded
+    # destination_file_name = "local/path/to/file"
+
+    storage_client = storage.Client()
+
+    bucket = storage_client.bucket(bucket_name)
+
+    # Construct a client side representation of a blob.
+    # Note `Bucket.blob` differs from `Bucket.get_blob` as it doesn't retrieve
+    # any content from Google Cloud Storage. As we don't need additional data,
+    # using `Bucket.blob` is preferred here.
+    blob = bucket.blob(source_blob_name)
+    blob.download_to_filename(destination_file_name)
+
+    print(
+        "Downloaded storage object {} from bucket {} to local file {}.".format(
+            source_blob_name, bucket_name, destination_file_name
+        )
+    )
+    
+#copy file from bucket
+model_dest_path = '/tmp/pytorch_model.bin';
+download_blob('tinder-standup-model-bucket1','pytorch_model.bin',model_dest_path)
+
+rootPath ="./"
 
 #these are buried in the src directory for transformers. If you want to look at 
 #the scripts, run the block where they are used, and click on popup box. 
 from transformers import TextDataset, DataCollatorForLanguageModeling
 from transformers import pipeline
 
-workingPath=rootPath
-
 #reloading model and tokenizer from local storage
 
-print(model_path)
+print(model_dest_path)
 tokenizer = transformers.GPT2Tokenizer.from_pretrained('gpt2')
-#tokenizer=GPT2Tokenizer.from_pretrained(model_path)
-model=GPT2LMHeadModel.from_pretrained(model_path)
+model=GPT2LMHeadModel.from_pretrained(model_dest_path)
 
 from flask import Flask,request
 import pickle
