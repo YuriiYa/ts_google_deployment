@@ -20,6 +20,15 @@ import transformers
 import torch
 from google.cloud import storage
 
+try:
+  import googleclouddebugger
+  googleclouddebugger.enable(
+    breakpoint_enable_canary=True
+  )
+except ImportError:
+  pass
+  
+
 def download_blob(bucket_name, source_blob_name, destination_file_name):
     """Downloads a blob from the bucket."""
     # The ID of your GCS bucket
