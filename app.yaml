@@ -1,18 +1,23 @@
-runtime: python37
-env: standard
-#env: flex
+# deployment examples https://cloud.google.com/docs/open-tutorials#flexible%20%20python
+# security as here  https://cloud.google.com/community/tutorials/appengine-serve-machine-learning-model
+runtime: custom
+env: flex
+
+#runtime: python37
+#env: standard
+#instance_class: B4_1G
+
 # how to config debug https://cloud.google.com/debugger/docs/setup/python#console
 # debug ref https://console.cloud.google.com/debug?app=GAE%3Adefault%4020211217t054929&cloudshell=false&project=tinder-standup-comic
 
 #https://cloud.google.com/appengine/docs/standard/#second-gen-runtimes
 #entrypoint: gunicorn -b :5000 -w 1 main:app
 
-instance_class: B4_1G
-
 runtime_config:
     python_version: 3.7
     
-  
+service: gpt2service
+
 # This sample incurs costs to run on the App Engine flexible environment. 
 # The settings below are to reduce costs during testing and are not appropriate
 # for production use. For more information, see:
@@ -26,13 +31,13 @@ manual_scaling:
 # The standard environment doesn't support as granular resource specification as the flexible environment, there is no resources config in its app.yaml Reference. It only supports selecting pre-defined instance classes. From the same doc:
 resources:
   cpu: 2
-  memory_gb: 9
+  memory_gb: 7.5
   disk_size_gb: 10
   volumes:
   - name: ramdisk1
     volume_type: tmpfs
-    size_gb: 1
+    size_gb: 4
     
 network:
   forwarded_ports:
-    - 5000/tcp
+    - 5000:5000
