@@ -1,5 +1,6 @@
-runtime: python
-env: flex
+runtime: python37
+env: standard
+#env: flex
 # how to config debug https://cloud.google.com/debugger/docs/setup/python#console
 # debug ref https://console.cloud.google.com/debug?app=GAE%3Adefault%4020211217t054929&cloudshell=false&project=tinder-standup-comic
 
